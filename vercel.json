@@ -1,3 +1,7 @@
 {
-  "rootDirectory": "templates/landing"
+  "rootDirectory": "templates/landing",
+  "framework": "nextjs",
+  "buildCommand": "npm run build",
+  "installCommand": "npm install",
+  "outputDirectory": ".next"
 }
