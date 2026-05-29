@@ -1,5 +1,5 @@
 'use client';
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import LanguageSelect from '../components/LanguageSelect';
 import UploadView from '../components/UploadView';
 import GalleryView, { Photo } from '../components/GalleryView';
@@ -11,6 +11,22 @@ export default function Home() {
   const [view, setView] = useState<View>('lang');
   const [lang, setLang] = useState<Lang>('en');
   const [photos, setPhotos] = useState<Photo[]>([]);
+  const [isAdmin, setIsAdmin] = useState(false);
+
+  // Load saved photos on first render
+  useEffect(() => {
+    try {
+      const saved = localStorage.getItem('qr-album-photos');
+      if (saved) setPhotos(JSON.parse(saved));
+    } catch {}
+  }, []);
+
+  // Persist photos whenever they change
+  useEffect(() => {
+    try {
+      localStorage.setItem('qr-album-photos', JSON.stringify(photos));
+    } catch {}
+  }, [photos]);
 
   function chooseLang(l: Lang) {
     setLang(l);
@@ -30,6 +46,10 @@ export default function Home() {
     );
   }
 
+  function deletePhoto(id: string) {
+    setPhotos(prev => prev.filter(p => p.id !== id));
+  }
+
   if (view === 'lang') return <LanguageSelect onSelect={chooseLang} />;
 
   if (view === 'upload') return (
@@ -37,7 +57,7 @@ export default function Home() {
       lang={lang}
       onUpload={addPhotos}
       onGallery={() => setView('gallery')}
-      onHome={() => setView('lang')}
+      onHome={() => setView('upload')}
       photoCount={photos.length}
       recentPhotos={photos.slice(0, 4).map(p => p.src)}
     />
@@ -49,6 +69,10 @@ export default function Home() {
       photos={photos}
       onLike={toggleLike}
       onUpload={() => setView('upload')}
+      onHome={() => setView('upload')}
+      isAdmin={isAdmin}
+      onToggleAdmin={() => setIsAdmin(a => !a)}
+      onDelete={deletePhoto}
     />
   );
 }
