@@ -55,6 +55,7 @@ export default function Home() {
   if (view === 'upload') return (
     <UploadView
       lang={lang}
+      onLangChange={setLang}
       onUpload={addPhotos}
       onGallery={() => setView('gallery')}
       onHome={() => setView('upload')}
@@ -66,6 +67,7 @@ export default function Home() {
   return (
     <GalleryView
       lang={lang}
+      onLangChange={setLang}
       photos={photos}
       onLike={toggleLike}
       onUpload={() => setView('upload')}

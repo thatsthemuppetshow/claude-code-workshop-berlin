@@ -4,6 +4,7 @@ import { Lang, t } from '../lib/translations';
 
 interface Props {
   lang: Lang;
+  onLangChange: (l: Lang) => void;
   onUpload: (srcs: string[]) => void;
   onGallery: () => void;
   onHome: () => void;
@@ -13,7 +14,7 @@ interface Props {
 
 type Status = 'idle' | 'preview' | 'uploading' | 'done';
 
-export default function UploadView({ lang, onUpload, onGallery, onHome, photoCount, recentPhotos }: Props) {
+export default function UploadView({ lang, onLangChange, onUpload, onGallery, onHome, photoCount, recentPhotos }: Props) {
   const [status, setStatus] = useState<Status>('idle');
   const [previews, setPreviews] = useState<string[]>([]);
   const [showFaq, setShowFaq] = useState(false);
@@ -63,7 +64,18 @@ export default function UploadView({ lang, onUpload, onGallery, onHome, photoCou
     <div className="min-h-screen bg-paper flex flex-col">
 
       {/* Header */}
-      <header className="flex items-center justify-end px-6 py-4 border-b border-ink/10">
+      <header className="flex items-center justify-between px-6 py-4 border-b border-ink/10">
+        <div className="flex items-center gap-1">
+          {(['en', 'de', 'tr'] as Lang[]).map((l) => (
+            <button
+              key={l}
+              onClick={() => onLangChange(l)}
+              className={`px-2 py-1 rounded text-xs font-bold uppercase tracking-wider transition ${lang === l ? 'text-accent' : 'text-ink/30 hover:text-ink/60'}`}
+            >
+              {l}
+            </button>
+          ))}
+        </div>
         <button
           onClick={() => setShowFaq(true)}
           className="px-4 py-1.5 border-2 border-ink/20 rounded-full text-sm font-bold text-ink hover:border-accent hover:text-accent transition"

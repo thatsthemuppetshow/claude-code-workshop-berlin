@@ -14,6 +14,7 @@ export interface Photo {
 
 interface Props {
   lang: Lang;
+  onLangChange: (l: Lang) => void;
   photos: Photo[];
   onLike: (id: string) => void;
   onUpload: () => void;
@@ -30,7 +31,7 @@ function download(src: string, id: string) {
   a.click();
 }
 
-export default function GalleryView({ lang, photos, onLike, onUpload, onHome, isAdmin, onToggleAdmin, onDelete }: Props) {
+export default function GalleryView({ lang, onLangChange, photos, onLike, onUpload, onHome, isAdmin, onToggleAdmin, onDelete }: Props) {
   const [selectedId, setSelectedId] = useState<string | null>(null);
   const [showLogin, setShowLogin] = useState(false);
   const [loginEmail, setLoginEmail] = useState('');
@@ -96,6 +97,17 @@ export default function GalleryView({ lang, photos, onLike, onUpload, onHome, is
           {isAdmin && (
             <span className="text-xs font-semibold text-white bg-red-500 px-2 py-0.5 rounded-full">Admin</span>
           )}
+          <div className="flex items-center gap-1 ml-1">
+            {(['en', 'de', 'tr'] as Lang[]).map((l) => (
+              <button
+                key={l}
+                onClick={() => onLangChange(l)}
+                className={`px-2 py-1 rounded text-xs font-bold uppercase tracking-wider transition ${lang === l ? 'text-accent' : 'text-ink/30 hover:text-ink/60'}`}
+              >
+                {l}
+              </button>
+            ))}
+          </div>
         </div>
         <div className="flex items-center gap-2">
           {isAdmin ? (
