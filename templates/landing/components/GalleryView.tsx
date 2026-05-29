@@ -2,6 +2,9 @@
 import { useState, useEffect, useCallback } from 'react';
 import { Lang, t } from '../lib/translations';
 
+const ADMIN_EMAIL = 'damciogluece@gmail.com';
+const ADMIN_PASSWORD = 'RobertEceLatte';
+
 export interface Photo {
   id: string;
   src: string;
@@ -29,7 +32,31 @@ function download(src: string, id: string) {
 
 export default function GalleryView({ lang, photos, onLike, onUpload, onHome, isAdmin, onToggleAdmin, onDelete }: Props) {
   const [selectedId, setSelectedId] = useState<string | null>(null);
+  const [showLogin, setShowLogin] = useState(false);
+  const [loginEmail, setLoginEmail] = useState('');
+  const [loginPassword, setLoginPassword] = useState('');
+  const [loginError, setLoginError] = useState('');
   const T = t[lang];
+
+  function handleAdminLogin(e: React.FormEvent) {
+    e.preventDefault();
+    if (loginEmail === ADMIN_EMAIL && loginPassword === ADMIN_PASSWORD) {
+      setShowLogin(false);
+      setLoginEmail('');
+      setLoginPassword('');
+      setLoginError('');
+      onToggleAdmin();
+    } else {
+      setLoginError('Incorrect email or password.');
+    }
+  }
+
+  function openLogin() {
+    setLoginError('');
+    setLoginEmail('');
+    setLoginPassword('');
+    setShowLogin(true);
+  }
 
   const selectedIndex = photos.findIndex(p => p.id === selectedId);
   const selected = selectedIndex >= 0 ? photos[selectedIndex] : null;
@@ -71,12 +98,21 @@ export default function GalleryView({ lang, photos, onLike, onUpload, onHome, is
           )}
         </div>
         <div className="flex items-center gap-2">
-          <button
-            onClick={onToggleAdmin}
-            className={`px-3 py-1.5 rounded-full text-xs font-semibold border transition ${isAdmin ? 'bg-red-500 text-white border-red-500' : 'border-ink/20 text-ink/50 hover:border-ink/40'}`}
-          >
-            {isAdmin ? 'Exit Admin' : 'Admin'}
-          </button>
+          {isAdmin ? (
+            <button
+              onClick={onToggleAdmin}
+              className="px-3 py-1.5 rounded-full text-xs font-semibold bg-red-500 text-white border border-red-500"
+            >
+              Exit Admin
+            </button>
+          ) : (
+            <button
+              onClick={openLogin}
+              className="px-3 py-1.5 rounded-full text-xs font-semibold border border-ink/20 text-ink/50 hover:border-ink/40 transition"
+            >
+              Admin
+            </button>
+          )}
           <button onClick={onUpload} className="px-4 py-2 bg-accent text-white rounded-full text-sm font-semibold">
             {T.uploadCta}
           </button>
@@ -151,6 +187,66 @@ export default function GalleryView({ lang, photos, onLike, onUpload, onHome, is
           Home
         </button>
       </div>
+
+      {/* Admin login modal */}
+      {showLogin && (
+        <div
+          className="fixed inset-0 bg-black/60 z-50 flex items-center justify-center px-6"
+          onClick={() => setShowLogin(false)}
+        >
+          <div
+            className="bg-paper w-full max-w-sm rounded-3xl p-8 shadow-2xl"
+            onClick={e => e.stopPropagation()}
+          >
+            <h2 className="text-2xl font-bold text-ink mb-1">Admin login</h2>
+            <p className="text-sm text-ink/50 mb-6">Enter your credentials to manage the album.</p>
+
+            <form onSubmit={handleAdminLogin} className="space-y-4">
+              <div>
+                <label className="block text-xs font-semibold text-ink/60 mb-1 uppercase tracking-wide">Email</label>
+                <input
+                  type="email"
+                  value={loginEmail}
+                  onChange={e => setLoginEmail(e.target.value)}
+                  placeholder="your@email.com"
+                  required
+                  autoFocus
+                  className="w-full px-4 py-3 rounded-xl border-2 border-ink/15 focus:border-accent focus:outline-none text-ink bg-paper transition"
+                />
+              </div>
+              <div>
+                <label className="block text-xs font-semibold text-ink/60 mb-1 uppercase tracking-wide">Password</label>
+                <input
+                  type="password"
+                  value={loginPassword}
+                  onChange={e => setLoginPassword(e.target.value)}
+                  placeholder="••••••••"
+                  required
+                  className="w-full px-4 py-3 rounded-xl border-2 border-ink/15 focus:border-accent focus:outline-none text-ink bg-paper transition"
+                />
+              </div>
+
+              {loginError && (
+                <p className="text-red-500 text-sm font-medium">{loginError}</p>
+              )}
+
+              <button
+                type="submit"
+                className="w-full py-3 bg-ink text-paper rounded-full font-semibold text-lg hover:bg-accent transition mt-2"
+              >
+                Login
+              </button>
+              <button
+                type="button"
+                onClick={() => setShowLogin(false)}
+                className="w-full py-3 border border-ink/20 rounded-full font-semibold text-ink"
+              >
+                Cancel
+              </button>
+            </form>
+          </div>
+        </div>
+      )}
 
       {/* Lightbox */}
       {selected && (
