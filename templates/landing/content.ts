@@ -5,50 +5,50 @@
 // ────────────────────────────────────────────────────────────────
 
 export const business = {
-  name: "Hartmann Coffee Roasters",
-  shortName: "Hartmann",
-  tagline: "Small-batch coffee, roasted in Kreuzberg.",
+  name: "my-qr-album",
+  shortName: "my-qr-album",
+  tagline: "Scan. Share. Remember.",
 };
 
 export const nav = {
   links: [
-    { label: "Services", href: "#services" },
+    { label: "Features", href: "#services" },
     { label: "How it works", href: "#how" },
     { label: "FAQ", href: "#faq" },
     { label: "Contact", href: "#contact" },
   ],
-  ctaLabel: "Order beans",
+  ctaLabel: "Create an album",
   ctaHref: "#contact",
 };
 
 export const hero = {
-  eyebrow: "Berlin · since 2018",
-  heading: "Coffee that tastes like someone made a choice.",
+  eyebrow: "No app. No account. Just scan.",
+  heading: "Your event's photos, shared in seconds.",
   subheading:
-    "We source single-origin beans from farms we've actually visited, roast them in small batches at our Kreuzberg studio, and deliver them to cafés and homes across Germany.",
-  ctaPrimary: { label: "Order beans", href: "#contact" },
-  ctaSecondary: { label: "See our services", href: "#services" },
+    "my-qr-album turns any gathering into a shared photo album. Print a QR code, let guests scan it, and everyone can upload, browse, like, and download — instantly, from any phone.",
+  ctaPrimary: { label: "Create an album", href: "#contact" },
+  ctaSecondary: { label: "See how it works", href: "#how" },
 };
 
 export const services = {
-  heading: "What we do",
+  heading: "What you get",
   intro:
-    "Three things, done seriously.",
+    "Three features, built around the moment.",
   items: [
     {
-      title: "Wholesale roasting",
+      title: "Upload from any phone",
       summary:
-        "Custom roast profiles for cafés and restaurants. We work with 23 venues across Berlin, Hamburg, and Munich. Weekly fresh delivery, transparent pricing.",
+        "Guests scan the QR code and upload photos straight from their camera roll or take new ones on the spot. No app to download, no account to create.",
     },
     {
-      title: "Direct-to-home subscriptions",
+      title: "View and like together",
       summary:
-        "Choose your beans, your frequency, and your grind. We ship within 48 hours of roasting. Pause or cancel anytime, no friction.",
+        "Everyone sees the same live album. Browse every photo that's been shared, heart your favourites, and watch the collection grow in real time.",
     },
     {
-      title: "Barista training",
+      title: "Download what you love",
       summary:
-        "Two-day intensive workshops for new café staff. Covers extraction, milk technique, and how to taste. Held in our Kreuzberg studio one Saturday a month.",
+        "Save any photo or the whole album to your device with one tap. Full resolution, yours to keep — long after the event is over.",
     },
   ],
 };
@@ -57,58 +57,58 @@ export const howItWorks = {
   heading: "How it works",
   steps: [
     {
-      title: "Tell us what you like",
+      title: "Create your album",
       summary:
-        "Bright and fruity? Deep and chocolatey? Send us a message or take our 60-second taste quiz.",
+        "Sign up and give your album a name. We generate a unique QR code for you to print, display, or share digitally.",
     },
     {
-      title: "We send a tasting flight",
+      title: "Guests scan and upload",
       summary:
-        "Three 100g bags, each from a different origin. €18 including shipping. No subscription required.",
+        "Anyone with a phone can scan the code and start uploading photos immediately — no account, no app, no friction.",
     },
     {
-      title: "We dial in your favorite",
+      title: "Everyone enjoys and downloads",
       summary:
-        "Tell us which you preferred and we'll send 250g or 1kg bags of that one, roasted to order.",
+        "The whole group sees every photo as it's added. Like your favourites, download what you want, and keep the memories forever.",
     },
   ],
 };
 
 export const benefits = {
-  heading: "Why us, honestly",
+  heading: "Why my-qr-album",
   items: [
     {
-      title: "We taste everything we send",
+      title: "Zero friction for guests",
       summary:
-        "Every batch is cupped before it leaves the roastery. If we wouldn't drink it, you don't get it.",
+        "No app to install, no account to create. Guests scan the code and they're in. That's it — every single person can participate.",
     },
     {
-      title: "We know our farmers",
+      title: "Every perspective, in one place",
       summary:
-        "We work directly with seven farms across Ethiopia, Colombia, and Honduras. Two of them we visit in person each year.",
+        "Your photographer gets the wide shots. Your friends get the candid ones. my-qr-album collects every angle of the moment, automatically.",
     },
     {
-      title: "We deliver fast or it's free",
+      title: "Instant and live",
       summary:
-        "Beans ship within 48 hours of roasting. If your order is late, we refund the shipping. We haven't had to do that in 14 months.",
+        "Photos appear in the album the moment they're uploaded. No waiting, no syncing, no sharing individual files over chat.",
     },
   ],
 };
 
 export const testimonials = {
-  heading: "What our customers say",
+  heading: "What people are saying",
   quotes: [
     {
       text:
-        "We switched to Hartmann two years ago and our regulars notice. The roasts are consistent and Andre actually visits the café to taste with us. That's not normal.",
-      author: "Lina Brückner",
-      role: "Owner, Café Erna",
+        "We used my-qr-album at our wedding and it was the best decision. Every guest uploaded their photos and by the end of the night we had over 400 pictures from angles we'd never have thought to capture.",
+      author: "Sara & Mert",
+      role: "Wedding, Istanbul",
     },
     {
       text:
-        "I tried four roasters before settling on these guys. The Ethiopian Yirgacheffe they sent in March is the best coffee I've made at home.",
-      author: "Tomás Reiter",
-      role: "Home subscriber, Hamburg",
+        "I set it up in two minutes for our team offsite. No one had to install anything, no group chats clogged with files — everyone just scanned and uploaded. Brilliant.",
+      author: "Jonas Krause",
+      role: "Product Lead, Berlin",
     },
   ],
 };
@@ -117,20 +117,20 @@ export const faq = {
   heading: "Common questions",
   items: [
     {
-      q: "Do you ship outside Germany?",
-      a: "Yes — we ship across the EU. Delivery takes 3–5 business days. Shipping costs vary by country.",
+      q: "Do guests need to create an account?",
+      a: "No. Anyone who scans the QR code can upload, view, like, and download photos immediately. No sign-up, no password, no app.",
     },
     {
-      q: "How fresh are the beans when they arrive?",
-      a: "Roasted within 48 hours of shipping. We recommend brewing them within 6 weeks of the roast date printed on the bag.",
+      q: "How many photos can be uploaded?",
+      a: "There is no hard limit. Albums are designed to hold everything from a small gathering to a large event.",
     },
     {
-      q: "Can I pause my subscription?",
-      a: "Anytime. Log in, pause as long as you want, restart when you're ready. No questions asked.",
+      q: "How long is the album available?",
+      a: "Your album stays live for as long as your plan is active. You can download everything at any time.",
     },
     {
-      q: "Do you do training for individuals?",
-      a: "Our group workshops are for professional baristas, but we offer one-on-one sessions on request. Email us and we'll work out a date.",
+      q: "Can I control who accesses the album?",
+      a: "The QR code is the key — only people who have it can access the album. You can also set an optional password for extra privacy.",
     },
   ],
 };
@@ -138,15 +138,15 @@ export const faq = {
 export const contact = {
   heading: "Get in touch",
   body:
-    "Wholesale questions, subscriptions, training enquiries — drop us a line. We reply within one business day.",
-  email: "hello@hartmann-coffee.example",
-  phone: "+49 30 1234 5678",
-  hours: "Mon–Fri · 09:00 — 17:00 CET",
-  address: "Oranienstraße 42, 10999 Berlin",
+    "Questions about my-qr-album, pricing, or anything else — send us a message. We reply within one business day.",
+  email: "damciogluece@gmail.com",
+  phone: "",
+  hours: "",
+  address: "",
 };
 
 export const meta = {
-  title: "Hartmann Coffee Roasters — Small-batch coffee, Kreuzberg",
+  title: "my-qr-album — Scan. Share. Remember.",
   description:
-    "Single-origin beans, custom roasts, and barista training in Berlin.",
+    "A QR-code photo album anyone can use instantly. No app, no account — just scan and share.",
 };

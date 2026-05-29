@@ -35,3 +35,4 @@ The user is **non-technical**. They have not written code before today. Treat th
 - Features that need a database, auth, or backend — out of scope for this workshop. Suggest a simpler alternative.
 - New npm packages — ask before installing.
 - Tailwind colors — prefer the existing palette in `tailwind.config.ts`. If they want a new color, add it to the config rather than hardcoding hex values throughout.
+

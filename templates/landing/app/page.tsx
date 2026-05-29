@@ -1,29 +1,54 @@
-import { Nav } from "../components/Nav";
-import { Hero } from "../components/Hero";
-import { Services } from "../components/Services";
-import { HowItWorks } from "../components/HowItWorks";
-import { Benefits } from "../components/Benefits";
-import { Testimonials } from "../components/Testimonials";
-import { FAQ } from "../components/FAQ";
-import { Contact } from "../components/Contact";
-import { business } from "../content";
+'use client';
+import { useState } from 'react';
+import LanguageSelect from '../components/LanguageSelect';
+import UploadView from '../components/UploadView';
+import GalleryView, { Photo } from '../components/GalleryView';
+import { Lang } from '../lib/translations';
+
+type View = 'lang' | 'upload' | 'gallery';
 
 export default function Home() {
+  const [view, setView] = useState<View>('lang');
+  const [lang, setLang] = useState<Lang>('en');
+  const [photos, setPhotos] = useState<Photo[]>([]);
+
+  function chooseLang(l: Lang) {
+    setLang(l);
+    setView('upload');
+  }
+
+  function addPhotos(srcs: string[]) {
+    const newPhotos = srcs.map((src, i) => ({ id: `${Date.now()}-${i}`, src, liked: false, likes: 0 }));
+    setPhotos(prev => [...newPhotos, ...prev]);
+  }
+
+  function toggleLike(id: string) {
+    setPhotos(prev =>
+      prev.map(p =>
+        p.id === id ? { ...p, liked: !p.liked, likes: p.liked ? p.likes - 1 : p.likes + 1 } : p
+      )
+    );
+  }
+
+  if (view === 'lang') return <LanguageSelect onSelect={chooseLang} />;
+
+  if (view === 'upload') return (
+    <UploadView
+      lang={lang}
+      onUpload={addPhotos}
+      onGallery={() => setView('gallery')}
+      onHome={() => setView('lang')}
+      photoCount={photos.length}
+      recentPhotos={photos.slice(0, 4).map(p => p.src)}
+    />
+  );
+
   return (
-    <>
-      <Nav />
-      <main>
-        <Hero />
-        <Services />
-        <HowItWorks />
-        <Benefits />
-        <Testimonials />
-        <FAQ />
-        <Contact />
-      </main>
-      <footer className="bg-muted border-t border-ink/10 px-6 py-10 text-center text-sm text-ink/60">
-        © {new Date().getFullYear()} {business.name} · Made with Claude Code in Berlin
-      </footer>
-    </>
+    <GalleryView
+      lang={lang}
+      photos={photos}
+      onLike={toggleLike}
+      onUpload={() => setView('upload')}
+    />
   );
 }
